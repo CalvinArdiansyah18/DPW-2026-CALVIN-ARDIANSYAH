@@ -1,32 +1,37 @@
-## Struktur Folder
+## 📁 Struktur Folder 
+
 ```text
-jobsheet-01/
+jobsheet-02/
 ├── index.html               # Halaman beranda
 ├── buku/
-│   ├── daftar-buku.html     # Tabel daftar buku (+ Link Daftar & Tambah Anggota)
-│   └── tambah-buku.html     # Form tambah buku (+ Link Daftar & Tambah Anggota)
+│   ├── daftar-buku.html     # Tabel daftar buku 
+│   └── tambah-buku.html     # Form tambah buku 
 ├── anggota/
-│   ├── daftar-anggota.html  # Tabel daftar anggota (+ Tanggal Bergabung)
-│   └── tambah-anggota.html  # Form tambah anggota (+ Kolom Email) 
-├── assets
-│   │── css
-│        └── style.css       # Memberikan tampilan pada web 
+│   ├── daftar-anggota.html  # Tabel daftar anggota 
+│   └── tambah-anggota.html  # Form tambah anggota
+├── assets/
+│   └── css/
+│       └── style.css        # Memberikan tampilan pada web
 ├── README.md                # Dokumentasi singkat
 ```
 
-## 🔄 Pembaruan & Perubahan (Jobsheet 01 ➔ Jobsheet 02)
+## 🔄 Pembaruan & Perubahan Jobsheet 02
 
-Pada tahap **Jobsheet 02**, dilakukan integrasi gaya visual berbasis CSS untuk meningkatkan estetika dan kenyamanan antarmuka pengguna (*User Interface*):
-
-| Jenis Perubahan | Deskripsi Implementasi |
-| :--- | :--- |
-| ➕ **Penambahan Berkas CSS** | Membuat file `assets/css/style.css` sebagai tambahan visual . |
-| 🔗 **Integrasi HTML & CSS** | Menghubungkan berkas `style.css` ke seluruh dokumen HTML menggunakan elemen `<link>`. |
-| 🎨 **Pengapresiasian Visual** | Mengatur tipografi, skema warna, margin/padding, serta respon antarmuka elemen HTML. |
+| Jenis Perubahan                    | Deskripsi                                                                                     |
+| :--------------------------------- | :-------------------------------------------------------------------------------------------------------- |
+| ➕ **Penambahan Berkas CSS**        | Membuat file `assets/css/style.css` sebagai tambahan visual.                                              |
+| 🔗 **Integrasi HTML & CSS**        | Menghubungkan berkas `style.css` ke seluruh dokumen HTML menggunakan elemen `<link>`.                     |
+| 🎨 **Perubahan Warna Navbar**      | Mengubah warna navbar agar tampilan website lebih menarik dan mudah dibedakan.                            |
+| 📝 **Teks Section Menjadi Center** | Mengatur teks pada bagian section menjadi rata tengah agar tampilan lebih rapi.                |
+| 🔍 **Penambahan Tombol Detail**    | Menambahkan tombol **Detail** pada data untuk memudahkan pengguna melihat informasi lebih lengkap.        |
+| 📋 **Form Menjadi Center**         | Mengatur posisi form menjadi rata tengah (*center*) agar tampilan lebih terstruktur dan nyaman digunakan. |
+|
 
 ## ✨ Hasil & Dampak Penerapan CSS
 
-- **🎨 Tampilan Visual Menarik:** Web tidak putih polos 
-- **📐 Layout Rapi & Terstruktur:** Tata letak antarmuka lebih simetris, enak dipandang, dan mudah dinavigasi.
-- **⚡ Antarmuka Interaktif:** Menghilangkan kesan kaku pada elemen tombol, form, dan tabel.
-- **👁️ Kenyamanan Pengguna (UX):** Meningkatkan pengalaman membaca dan pengisian data bagi pengguna.
+* **🎨 Tampilan Visual Menarik:** Web tidak lagi terlihat putih polos karena menggunakan warna dan styling CSS.
+* **📐 Layout Rapi & Terstruktur:** Tata letak antarmuka menjadi lebih simetris, rapi, dan mudah dinavigasi.
+* **🧭 Navbar Lebih Menarik:** Perubahan warna navbar membuat navigasi lebih jelas dan menarik.
+* **🔍 Tombol Detail:** Memudahkan pengguna untuk melihat informasi yang lebih lengkap dari data yang tersedia.
+* **📝 Form Lebih Rapi:** Form diposisikan di tengah agar tampilan lebih terstruktur dan nyaman digunakan.
+* **👁️ Kenyamanan Pengguna (UX):** Meningkatkan pengalaman pengguna dalam membaca informasi dan mengisi data.
