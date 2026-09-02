@@ -25,7 +25,7 @@ jobsheet-02/
 | 📝 **Teks Section Menjadi Center** | Mengatur teks pada bagian section menjadi rata tengah agar tampilan lebih rapi.                |
 | 🔍 **Penambahan Tombol Detail**    | Menambahkan tombol **Detail** pada data untuk memudahkan pengguna melihat informasi lebih lengkap.        |
 | 📋 **Form Menjadi Center**         | Mengatur posisi form menjadi rata tengah (*center*) agar tampilan lebih terstruktur dan nyaman digunakan. |
-|
+
 
 ## ✨ Hasil & Dampak Penerapan CSS
 
