@@ -63,18 +63,18 @@
 
 ## 📊 Dashboard Admin
 ```text
-┌────────────────────────────────────────────────────────┐
-| PERPUSTAKAAN     Beranda | Buku | Anggota | Peminjaman | (Nama Petugas) Logout                                    |
-|------------------------------------------------------- |
-|  [Total Buku]   [Total Anggota]   [Sedang Dipinjam]    |
-|                                                        |
-|  Aksi Cepat:                                           |
-|  [ + Peminjaman Baru ]   [ + Pengembalian ]            |
-|                                                        |
-|  Transaksi Terbaru                                     |
-|  ----------------------------------------------------- |
-|  Anggota | Buku | Tgl Pinjam | Status                  |
-└────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────┐
+| PERPUSTAKAAN     Beranda | Buku | Anggota | Peminjaman  (Nama Petugas) Logout  |
+|--------------------------------------------------------------------------------|
+|  [Total Buku]   [Total Anggota]   [Sedang Dipinjam]                            |   
+|                                                                                |
+|  Aksi Cepat:                                                                   |
+|  [ + Peminjaman Baru ]   [ + Pengembalian ]                                    |
+|                                                                                |
+|  Transaksi Terbaru                                                             |
+|  ------------------------------------------------------------------------------| 
+|  Anggota | Buku | Tgl Pinjam | Status                                          |
+└────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## 📖 Halaman Peminjaman Buku
@@ -88,6 +88,7 @@
 |                                      |
 |        [  Simpan Peminjaman  ]       |
 └──────────────────────────────────────┘
+```
 
 ## ↩️ Halaman Pengembalian Buku
 ```text
