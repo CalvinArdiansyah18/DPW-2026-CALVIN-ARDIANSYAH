@@ -11,8 +11,7 @@
 <body>
     <header>
         <h1>PERPUSTAKAAN</h1>
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <label for="nav-toggle" class="nav-toggle-label">&#9776</label>
+        <button type="button" id="nav-toggle-btn" class="nav-toggle-btn" aria-label="Menu">&#9776;</button>
         <nav>
             <ul>
                 <li><a href="../index.html">Beranda</a></li>
@@ -27,6 +26,10 @@
     <main>
         <section>
             <h2>Daftar Buku</h2>
+            <div class="search-box">
+                <label for="search-input">Cari Judul Buku</label>
+                <input type="text" id="search-input" placeholder="Ketik judul buku...">
+            </div>
             <div class="table-responsive">
             <table>
                 <thead>
@@ -125,6 +128,7 @@
     <footer>
         <p>&copy; 2026 PERPUSTAKAAN &mdash; Jobsheet 1</p>
     </footer>
+    <script src="../aseets/js/app.js"></script>
 </body>
 
 </html>
