@@ -30,7 +30,7 @@ function initTableFilter() {
     if (!input || !table) return;
 
     input.addEventListener("keyup", function () {
-        const keyword = input.value.tiLoweCase();
+        const keyword = input.value.toLowerCase();
         const rows = table.querySelectorAll("tbody tr");
         rows.forEach(function (row) {
             const teks = row.textContent.toLowerCase();
@@ -43,7 +43,7 @@ function initTableFilter() {
 function tampilkanError(input, pesan) {
     hapusError(input);
     const span = document.createElement("span");
-    span.className + "error";
+    span.className = "error";
     span.textContent = pesan;
     input.insertAdjacentElement("afterend", span);
 }
@@ -62,7 +62,7 @@ function initValidasiForm() {
     form.addEventListener("submit", function (e) {
         let valid = true;
 
-        const judul = form.querySelector("[name='judul'], [name='nama");
+        const judul = form.querySelector("[name='judul'], [name='nama']");
         if (judul && judul.value.trim() === "") {
             tampilkanError(judul, "Field ini wajid diisi");
             valid = false;
@@ -79,12 +79,16 @@ function initValidasiForm() {
         }
 
         const tahun = form.querySelector("[name='tahun']");
-        if (isNaN(nilai) || nilai < 1900 || nilai > 2026) {
-            tampilkanError(tahun, "Tahun harus di antara 1900-2026");
-            valid = false;
-        } else {
-            hapusError(tahun);
+        if (tahun) {
+            const nilai = parseInt(tahun.value, 10);
+            if (isNaN(nilai) || nilai < 1900 || nilai > 2026) {
+                tampilkanError(tahun, "Tahun harus di antara 1900-2026");
+                valid = false;
+            } else {
+                hapusError(tahun);
+            }
         }
+
 
         const stok = form.querySelector("[name='stok']");
         if (stok) {
