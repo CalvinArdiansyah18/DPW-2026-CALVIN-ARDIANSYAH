@@ -13,7 +13,7 @@ $totalAnggota = count($_SESSION['anggota'] ?? []);
 
 <section>
     <h2>Ringkasan</h2>
-    <div>
+    <div class="ringkasan-grid">
         <article>
             <h3>Total Buku</h3>
             <p><?php echo $totalBuku; ?></p>
