@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PetCare | Tambah Perawatan</title>
+    <link rel="stylesheet" href="../aseets/css/style.css">
+</head>
+
+<body>
+    <!-- <header>
+        <nav>
+            <ul>
+                <li><a href="daftar-perawatan.html">Daftar Pemilik</a></li>
+            </ul>
+        </nav>
+    </header> -->
+
+    <main>
+        <section>
+            <h2>Tambah Perawatan</h2>
+            <form id="form-tambah">
+                <p>
+                    <label for="nama-hewan">Nama Hewan</label><br>
+                    <input type="text" id="nama-hewan" name="nama-hewan" required>
+                </p>
+                <p>
+                    <label for="kategori">Layanan</label><br>
+                    <select id="kategori" name="kategori" required>
+                        <option value="grooming">Grooming</option>
+                        <option value="vaksinasi">Vaksinasi</option>
+                        <option value="pemeriksaan">Pemeriksaan</option>
+                        <option value="penitipan">Penitipan</option>
+                        <option value="potong-bulu">Potong Bulu</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="tanggal">Tanggal</label><br>
+                    <input type="date" id="tanggal" name="tanggal">
+                </p>
+                <p>
+                    <label for="kategori">Status</label><br>
+                    <select id="kategori" name="kategori" required>
+                        <option value="menunggu">Menunggu</option>
+                        <option value="diproses">Diproses</option>
+                        <option value="selesai">Selesai</option>
+                    </select>
+                </p>
+                <p>
+                    <button type="submit">Simpan</button>
+                </p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; PetCare</p>
+    </footer>
+    <script src="../aseets/js/app.js"></script>
+</body>
+
+</html>
