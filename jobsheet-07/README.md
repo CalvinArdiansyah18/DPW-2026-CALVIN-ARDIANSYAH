@@ -26,7 +26,7 @@ jobsheet-07/
 └── README.md 
 ```
 ---
-## 🔄 Pembaruan & Perubahan Jobsheet 06
+## 🔄 Pembaruan & Perubahan Jobsheet 07
 | Jenis Perubahan | Deskripsi |
 | :--- | :--- |
 | 🐘 **Perubahan ke PHP** | Mengubah halaman HTML menjadi PHP agar dapat diproses secara dinamis. |
