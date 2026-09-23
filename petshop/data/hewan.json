@@ -1,0 +1,16 @@
+[
+  {
+    "nama": "Laskar",
+    "jenis": "Kucing",
+    "ras": "Anggora",
+    "umur": 4,
+    "pemilik": "Budi"
+  },
+  {
+    "nama": "Pelangi",
+    "jenis": "Anjing",
+    "ras": "Husky",
+    "umur": 2,
+    "pemilik": "Yeni"
+  }
+]
