@@ -10,6 +10,7 @@
 
 <body>
     <header>
+        <h1>PetCare</h1>
         <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
         <nav>
             <ul>
@@ -23,14 +24,16 @@
 
     <main>
         <section>
-            <h2>Daftar Hewan</h2>
+            <p id="loading-indicator" style="display: none;">Memuat data...</p>
+            <div class="table-responsive">
+            <div class="table-header">
+                <h2>Daftar Hewan</h2>
+                <button type="button" class="btn-tambah" onclick="window.location.href='tambah-hewan.html'"> + Tambah Hewan</button>
+            </div>
             <div class="search-box">
                 <label for="search-input">Cari Nama Hewan</label>
                 <input type="text" id="search-input" placeholder="Ketik nama hewan...">
-                <a href="./tambah-hewan.html" class="btn-tambah">Tambah Hewan</a>
             </div>
-            <p id="loading-indicator" style="display: none;">Memuat data...</p>
-            <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
