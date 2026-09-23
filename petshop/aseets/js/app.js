@@ -58,55 +58,60 @@ function hapusError(input) {
 }
 
 function initValidasiForm() {
-    const form = document.getElementById("form-tambah");
-    if (!form) return;
+    const forms = document.querySelectorAll("#form-tambah");
+    if (forms.length === 0) return;
 
-    form.addEventListener("submit", function (e) {
-        let valid = true;
+    forms.forEach((form) => {
+        form.addEventListener("submit", function (e) {
+            let valid = true;
 
-        const judul = form.querySelector("[name='judul'], [name='nama']");
-        if (judul && judul.value.trim() === "") {
-            tampilkanError(judul, "Field ini wajid diisi");
-            valid = false;
-        } else if (judul) {
-            hapusError(judul);
-        }
+            const requiredInputs = form.querySelectorAll("[required]");
+            requiredInputs.forEach((input) => {
+                if (!input.value.trim()) {
+                    tampilkanError(input, "Field ini wajib diisi");
+                    valid = false;
+                } else {
+                    hapusError(input);
+                }
+            });
 
-        const pengarang = form.querySelector("[name='pengarang']");
-        if (pengarang && pengarang.value.trim() === "") {
-            tampilkanError(pengarang, "Pengarang ini wajid diisi");
-            valid = false;
-        } else if (pengarang) {
-            hapusError(pengarang);
-        }
-
-        const tahun = form.querySelector("[name='tahun']");
-        if (tahun) {
-            const nilai = parseInt(tahun.value, 10);
-            if (isNaN(nilai) || nilai < 1900 || nilai > 2026) {
-                tampilkanError(tahun, "Tahun harus di antara 1900-2026");
-                valid = false;
-            } else {
-                hapusError(tahun);
+            const email = form.querySelector("[name='email']");
+            if (email && email.value.trim() !== "") {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email.value.trim())) {
+                    tampilkanError(email, "Format email tidak valid");
+                    valid = false;
+                } else {
+                    hapusError(email);
+                }
             }
-        }
 
-
-        const stok = form.querySelector("[name='stok']");
-        if (stok) {
-            const nilai = parseInt(stok.value, 10);
-            if (isNaN(nilai) || nilai < 0) {
-                tampilkanError(stok, "Stok tidak boleh negatif.");
-                valid = false;
-            } else {
-                hapusError(stok);
+            const umur = form.querySelector("[name='umur']");
+            if (umur && umur.value !== "") {
+                const nilaiUmur = parseInt(umur.value, 10);
+                if (isNaN(nilaiUmur) || nilaiUmur < 0) {
+                    tampilkanError(umur, "Umur tidak boleh negatif");
+                    valid = false;
+                } else {
+                    hapusError(umur);
+                }
             }
-        }
 
-        if (!valid) {
-            e.preventDefault();
-        }
+            const jumlah = form.querySelector("[name='jumlah']");
+            if (jumlah && jumlah.value !== "") {
+                const nilaiJumlah = parseInt(jumlah.value, 10);
+                if (isNaN(nilaiJumlah) || nilaiJumlah < 0) {
+                    tampilkanError(jumlah, "Jumlah hewan tidak boleh negatif");
+                    valid = false;
+                } else {
+                    hapusError(jumlah);
+                }
+            }
 
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
     });
 }
 
