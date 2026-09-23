@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PetCare | Tambah Hewan</title>
+    <link rel="stylesheet" href="../aseets/css/style.css">
+</head>
+<body>
+    <!-- <header>
+        <nav>
+            <ul>
+                <li><a href="./daftar-hewan.html">Daftar Hewan</a></li>
+            </ul>
+        </nav>
+    </header> -->
+
+    <main>
+        <section>
+            <h2>Tambah Hewan</h2>
+            <form id="form-tambah">
+                <p>
+                    <label for="nama-hewan">Nama Hewan</label><br>
+                    <input type="text" id="nama-hewan" name="nama-hewan" required>
+                </p>
+                <p>
+                    <label for="kategori">Jenis Hewan</label><br>
+                    <select id="kategori" name="kategori" required>
+                        <option value="kucing">Kucing</option>
+                        <option value="anjing">Anjing</option>
+                        <option value="burung">Burung</option>
+                        <option value="ikan">Ikan</option>
+                        <option value="reptil">Reptil</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="ras">Ras</label><br>
+                    <input type="text" id="ras" name="ras" required>
+                </p>
+                <p>
+                    <label for="umur">Umur</label><br>
+                    <input type="number" id="umur" name="umur" required>
+                </p>
+                <p>
+                    <label for="pemilik">Pemilik</label><br>
+                    <input type="text" id="pemilik" name="pemilik">
+                </p>
+                <p>
+                    <button type="submit">Simpan</button>
+                </p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; PetCare</p>
+    </footer>
+    <script src="../aseets/js/app.js"></script>
+</body>
+</html>
