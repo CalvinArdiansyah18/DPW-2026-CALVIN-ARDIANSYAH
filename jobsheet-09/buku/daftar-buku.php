@@ -34,8 +34,8 @@ $totalPages = max(1, (int) ceil($totalRows / $perPage));
     <h2>Daftar Buku</h2>
 
     <?php if ($flash): ?>
-        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo $flash['pesan'] ?></p>
-    <?php endif ?>
+        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo $flash['pesan']; ?></p>
+    <?php endif; ?>
 
     <div class="search-box">
         <form method="get" action="daftar-buku.php">
@@ -92,4 +92,4 @@ $totalPages = max(1, (int) ceil($totalRows / $perPage));
     </nav>
 
 </section>
-<?php include __DIR__ . '/../includes/footer.php' ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

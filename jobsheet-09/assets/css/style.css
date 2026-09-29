@@ -1,3 +1,4 @@
+/* Reset & Base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,6 +21,7 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Header & Navbar  (Flexbox) */
 header {
   background-color: #836014;
   color: #fff;
@@ -45,6 +47,7 @@ header nav a {
   font-weight: 500;
 }
 
+/* Main Layout */
 main {
   max-width: 1000px;
   margin: 2rem auto;
@@ -69,6 +72,7 @@ section h2 {
   text-align: center;
 }
 
+/* Ringkasan */
 .ringkasan-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -94,6 +98,7 @@ section h2 {
   color: #1d5b8a;
 }
 
+/* Table */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -128,21 +133,65 @@ td button {
   font-size: 0.85rem;
 }
 
-td button:nth-of-type(1) {
+td button:first-of-type,
+td a.btn-edit {
   background-color: #f0ad4e;
   color: #fff;
 }
 
-td button:nth-of-type(2) {
+td button:last-of-type {
   background-color: #d9534f;
   color: #fff;
 }
 
-td button:nth-of-type(3) {
-  background-color: #dbd810;
-  color: #fff;
+td a.btn-edit {
+    display: inline-block;
+    padding: 0.35rem 0.7rem;
+    margin-right: 0.35rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
 }
 
+td form.form-hapus {
+    display: inline;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.pagination a {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #cdd4da;
+    border-radius: 4px;
+    color: #1d5b8a;
+}
+
+.pagination a.active {
+    background-color: #1d5b8a;
+    color: #fff;
+    border-color: #1d5b8a;
+}
+
+.search-box form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.search-box button {
+    padding: 0.55rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #1d5b8a;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Form */
 form p {
   margin-bottom: 1rem;
   text-align: center;
@@ -179,6 +228,7 @@ form button[type="submit"]:hover {
   background-color: #164869;
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 1.25rem;
@@ -186,10 +236,12 @@ footer {
   font-size: 0.9rem;
 }
 
+/* Table Responsive */
 .table-responsive {
   overflow-x: auto;
 }
 
+/* Hamburger */
 .nav-toggle-label {
   display: none;
   font-size: 1.6rem;
@@ -199,6 +251,25 @@ footer {
   cursor: pointer;
 }
 
+/* Flash Message */
+.flash {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Pesan Error */
 .error{
   display: block;
   color: #d9534f;
@@ -206,6 +277,7 @@ footer {
   margin-top: 0.25rem;
 }
 
+/* Pencarian */
 .search-box{
   margin-bottom: 1rem;
 }
@@ -218,12 +290,15 @@ footer {
   border-radius: 4px;
 }
 
+
+/* Tablet */
 @media (max-width: 768px) {
   main section:nth-of-type(2) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
   header {
     position: relative;

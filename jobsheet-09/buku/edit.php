@@ -25,7 +25,7 @@ if (!$buku) {
     <h2>Edit Buku</h2>
 
     <?php if ($flash): ?>
-        <p class="flash flash-<?php $flash['type']; ?>"><?php echo $flash['pesan']; ?></p>
+        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo $flash['pesan']; ?></p>
     <?php endif; ?>
 
     <form id="form-tambah" method="post" action="proses-edit.php">
@@ -63,3 +63,4 @@ if (!$buku) {
         </p>
     </form>
 </section>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

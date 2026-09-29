@@ -9,17 +9,22 @@ function initNavToggle() {
     });
 }
 
-// ===== Konfirmasi hapus (front-end only, belum ke server) =====
+// ===== Konfirmasi hapus =====
+// Tombol Hapus kini berada di dalam <form class="form-hapus" method="post">
+// yang benar-benar mengirim request DELETE ke server (buku/hapus.php,
+// anggota/hapus.php). Konfirmasi dilakukan pada event "submit" agar bisa
+// dibatalkan (preventDefault) sebelum request terkirim.
 function initHapusConfirm() {
-    document.querySelectorAll(".btn-hapus").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-            const row = btn.closest("tr");
-            const nama = row ? row.querySelector("td")?.textContent : "data ini";
-            const yakin = confirm("Yakin ingin menghapus \"" + nama + "\"?");
-            if (yakin && row) {
-                row.remove();
-            }
-        });
+    document.addEventListener("submit", function (e) {
+        const form = e.target;
+        if (!form.classList.contains("form-hapus")) return;
+
+        const row = form.closest("tr");
+        const nama = row ? row.querySelector("td")?.textContent : "data ini";
+        const yakin = confirm("Yakin ingin menghapus \"" + nama + "\"?");
+        if (!yakin) {
+            e.preventDefault();
+        }
     });
 }
 
@@ -64,7 +69,7 @@ function initValidasiForm() {
 
         const judul = form.querySelector("[name='judul'], [name='nama']");
         if (judul && judul.value.trim() === "") {
-            tampilkanError(judul, "Field ini wajid diisi");
+            tampilkanError(judul, "Field ini wajib diisi.");
             valid = false;
         } else if (judul) {
             hapusError(judul);
@@ -72,7 +77,7 @@ function initValidasiForm() {
 
         const pengarang = form.querySelector("[name='pengarang']");
         if (pengarang && pengarang.value.trim() === "") {
-            tampilkanError(pengarang, "Pengarang ini wajid diisi");
+            tampilkanError(pengarang, "Pengarang wajib diisi.");
             valid = false;
         } else if (pengarang) {
             hapusError(pengarang);
@@ -82,13 +87,12 @@ function initValidasiForm() {
         if (tahun) {
             const nilai = parseInt(tahun.value, 10);
             if (isNaN(nilai) || nilai < 1900 || nilai > 2026) {
-                tampilkanError(tahun, "Tahun harus di antara 1900-2026");
+                tampilkanError(tahun, "Tahun harus di antara 1900-2026.");
                 valid = false;
             } else {
                 hapusError(tahun);
             }
         }
-
 
         const stok = form.querySelector("[name='stok']");
         if (stok) {
@@ -104,7 +108,6 @@ function initValidasiForm() {
         if (!valid) {
             e.preventDefault();
         }
-
     });
 }
 
