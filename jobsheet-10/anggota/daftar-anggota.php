@@ -17,11 +17,11 @@ if ($keyword !== '') {
     $hitung->execute(['kw' => '%' . $keyword . '%']);
     $totalRows = $hitung->fetchColumn();
 
-    $stmt = $pdo->prepare("SELECT * FROM anggota WHERE nama ILIKE :kw ORDER BY id DESC LIMIT :limit OFFSET :offset");
+    $stmt = $pdo->prepare("SELECT * FROM anggota WHERE nama ILIKE :kw ORDER BY id ASC LIMIT :limit OFFSET :offset");
     $stmt->bindValue('kw', '%' . $keyword . '%');
 } else {
     $totalRows = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
-    $stmt = $pdo->prepare("SELECT * FROM anggota ORDER BY id DESC LIMIT :limit OFFSET :offset");
+    $stmt = $pdo->prepare("SELECT * FROM anggota ORDER BY id ASC LIMIT :limit OFFSET :offset");
 }
 $stmt->bindValue('limit', $perPage, PDO::PARAM_INT);
 $stmt->bindValue('offset', $offset, PDO::PARAM_INT);
@@ -51,6 +51,7 @@ $totalPages = max(1, (int) ceil($totalRows / $perPage));
         <table>
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>No. Anggota</th>
                     <th>Nama</th>
                     <th>Alamat</th>
@@ -61,11 +62,12 @@ $totalPages = max(1, (int) ceil($totalRows / $perPage));
             <tbody>
                 <?php if (empty($daftarAnggota)): ?>
                     <tr>
-                        <td colspan="5">Tidak ada data anggota yang cocok.</td>
+                        <td colspan="6">Tidak ada data anggota yang cocok.</td>
                     </tr>
                 <?php else: ?>
-                    <?php foreach ($daftarAnggota as $anggota): ?>
+                    <?php foreach ($daftarAnggota as $index => $anggota): ?>
                         <tr>
+                            <td><?php echo $offset + $index + 1; ?></td>
                             <td><?php echo $anggota['no_anggota']; ?></td>
                             <td><?php echo $anggota['nama']; ?></td>
                             <td><?php echo $anggota['alamat']; ?></td>
