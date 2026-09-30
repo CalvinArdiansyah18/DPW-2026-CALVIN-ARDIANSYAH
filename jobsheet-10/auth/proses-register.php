@@ -6,7 +6,7 @@ require __DIR__ . '/../includes/koneksi.php';
 
 $nama = trim($_POST['nama'] ?? '');
 $username = trim($_POST['username'] ?? '');
-$password = trim($_POST['password'] ?? '');
+$password = $_POST['password'] ?? '';
 
 $errors = [];
 if ($nama === '') {
@@ -16,20 +16,20 @@ if ($username === '') {
     $errors[] = "Username wajib diisi.";
 }
 if (strlen($password) < 6) {
-    $errors[] = "Password minimal 6 karakter";
+    $errors[] = "Password minimal 6 karakter.";
 }
 
 if (!empty($errors)) {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];
-    header('Location: ../register.php');
+    header('Location: register.php');
     exit;
 }
 
 $cek = $pdo->prepare("SELECT id FROM users WHERE username = :username");
 $cek->execute(['username' => $username]);
 if ($cek->fetch()) {
-    $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Username sudah digunakan'];
-    header('Location: ../register.php');
+    $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Username sudah digunakan.'];
+    header('Location: register.php');
     exit;
 }
 
@@ -39,7 +39,7 @@ $stmt = $pdo->prepare(
 $stmt->execute([
     'nama' => $nama,
     'username' => $username,
-    'password' => password_hash($password, PASSWORD_DEFAULT)
+    'password' => password_hash($password, PASSWORD_DEFAULT),
 ]);
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Registrasi berhasil, silakan login.'];
