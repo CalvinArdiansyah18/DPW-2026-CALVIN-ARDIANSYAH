@@ -11,13 +11,21 @@ $errors = [];
 if ($nama === '') {
     $errors[] = "Nama wajib diisi.";
 }
+
 if ($noAnggota === '') {
     $errors[] = "No. Anggota wajib diisi.";
+} else {
+    $cek = $pdo->prepare("SELECT COUNT(*) FROM anggota WHERE no_anggota = :no_anggota");
+    $cek->execute(['no_anggota' => $noAnggota]);
+
+    if ($cek->fetchColumn() > 0) {
+        $errors[] = "No. Anggota sudah digunakan.";
+    }
 }
 
 if (!empty($errors)) {
     $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];
-    header('Location: tambah.php');
+    header('Location: tambah-anggota.php');
     exit;
 }
 

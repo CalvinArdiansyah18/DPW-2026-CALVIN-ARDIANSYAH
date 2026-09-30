@@ -24,11 +24,11 @@ unset($_SESSION['flash']);
                 </p>
                 <p>
                     <label for="alamat">Alamat</label><br>
-                    <input type="text" id="alamat" name="alamat">
+                    <input type="text" id="alamat" name="alamat" required>
                 </p>
                 <p>
                     <label for="no_hp">No. HP</label><br>
-                    <input type="text" id="no_hp" name="no_hp">
+                    <input type="text" id="no_hp" name="no_hp" required>
                 </p>
                 <p>
                     <button type="submit">Simpan</button>
