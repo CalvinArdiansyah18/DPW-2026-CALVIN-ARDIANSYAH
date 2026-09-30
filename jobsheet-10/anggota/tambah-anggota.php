@@ -28,7 +28,7 @@ unset($_SESSION['flash']);
                 </p>
                 <p>
                     <label for="no_hp">No. HP</label><br>
-                    <input type="text" id="no_hp" name="no_hp" required>
+                    <input type="text" id="no_hp" name="no_hp" required minlength="11">
                 </p>
                 <p>
                     <button type="submit">Simpan</button>
