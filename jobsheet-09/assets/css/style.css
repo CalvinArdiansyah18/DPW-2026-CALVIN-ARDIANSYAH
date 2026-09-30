@@ -54,7 +54,7 @@ main {
   padding: 0 1.5rem;
 }
 
-main section p {
+main section p, .p1 {
   text-align: center;
 }
 

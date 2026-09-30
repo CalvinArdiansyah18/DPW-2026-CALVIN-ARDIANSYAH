@@ -9,7 +9,7 @@ $totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
 
 <section>
     <h2>Selamat Datang di Sistem Perpustakaan</h2>
-    <p>Aplikasi untuk mengelola data buku dan anggota perpustakaan.</p>
+    <p class="p1">Aplikasi untuk mengelola data buku dan anggota perpustakaan.</p>
 </section>
 
 <section>
