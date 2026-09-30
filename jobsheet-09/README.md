@@ -12,9 +12,7 @@ jobsheet-09/
 │   ├── css/
 │   │   └── style.css
 │   └── js/
-│       ├── anggota.js
-│       ├── app.js
-│       └── buku.js
+│       └── app.js
 ├── buku/
 │   ├── daftar-buku.php
 │   ├── edit.php
