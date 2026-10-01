@@ -1,6 +1,6 @@
 <?php
-require __DIR__ .'/../includes/auth.php';
-require __DIR__ .'/../includes/koneksi.php';
+require __DIR__ . '/../includes/auth.php';
+require __DIR__ . '/../includes/koneksi.php';
 
 $judul = trim($_POST['judul'] ?? '');
 $pengarang = trim($_POST['pengarang'] ?? '');
@@ -31,36 +31,19 @@ if (!empty($errors)) {
     exit;
 }
 
-/*
- * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
- *
- * $stmt = $pdo->prepare(
- *     "INSERT INTO buku (judul, pengarang, tahun, isbn, stok, kategori)
- *     VALUES (:judul, :pengarang, :tahun, :isbn, :stok, :kategori)
- *     RETURNING id"
- * );
- * $stmt->execute([
- *     'judul' => $judul,
- *     'pengarang' => $pengarang,
- *     'tahun' => (int) $tahun,
- *     'isbn' => $isbn,
- *     'stok' => (int) $stok,
- *     'kategori' => $kategori,
- * ]);
- */
-
-// Versi PostgreSQL pg_query_params.
-$stmt = pg_query_params(
-    $conn,
+$stmt = $pdo->prepare(
     "INSERT INTO buku (judul, pengarang, tahun, isbn, stok, kategori)
-     VALUES ($1, $2, $3, $4, $5, $6)
-     RETURNING id",
-    [$judul, $pengarang, (int) $tahun, $isbn, (int) $stok, $kategori]
+      VALUES (:judul, :pengarang, :tahun, :isbn, :stok, :kategori)
+      RETURNING id"
 );
-
-if ($stmt === false) {
-    die("Query database gagal: " . pg_last_error($conn));
-}
+$stmt->execute([
+    'judul' => $judul,
+    'pengarang' => $pengarang,
+    'tahun' => (int) $tahun,
+    'isbn' => $isbn,
+    'stok' => (int) $stok,
+    'kategori' => $kategori,
+]);
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
 header('Location: daftar-buku.php');

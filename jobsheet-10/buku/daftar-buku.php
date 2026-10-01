@@ -11,61 +11,21 @@ $page = max(1, (int) ($_GET['page'] ?? 1));
 $offset = ($page - 1) * $perPage;
 $keyword = trim($_GET['q'] ?? '');
 
-/*
- * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
- *
- * if ($keyword !== '') {
- *     $hitung = $pdo->prepare("SELECT COUNT(*) FROM buku WHERE judul ILIKE :kw");
- *     $hitung->execute(['kw' => '%' . $keyword . '%']);
- *     $totalRows = $hitung->fetchColumn();
- *
- *     $stmt = $pdo->prepare("SELECT * FROM buku WHERE judul ILIKE :kw ORDER BY id ASC LIMIT :limit OFFSET :offset");
- *     $stmt->bindValue('kw', '%' . $keyword . '%');
- * } else {
- *     $totalRows = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
- *     $stmt = $pdo->prepare("SELECT * FROM buku ORDER BY id ASC LIMIT :limit OFFSET :offset");
- * }
- * $stmt->bindValue('limit', $perPage, PDO::PARAM_INT);
- * $stmt->bindValue('offset', $offset, PDO::PARAM_INT);
- * $stmt->execute();
- * $daftarBuku = $stmt->fetchAll(PDO::FETCH_ASSOC);
- */
-
-// Versi PostgreSQL pg_query / pg_query_params.
 if ($keyword !== '') {
-    $kw = '%' . $keyword . '%';
+    $hitung = $pdo->prepare("SELECT COUNT() FROM buku WHERE judul ILIKE :kw");
+    $hitung->execute(['kw' => '%' . $keyword . '%']);
+    $totalRows = $hitung->fetchColumn();
 
-    $hitung = pg_query_params(
-        $conn,
-        "SELECT COUNT(*) FROM buku WHERE judul ILIKE $1",
-        [$kw]
-    );
-
-    $stmt = pg_query_params(
-        $conn,
-        "SELECT * FROM buku WHERE judul ILIKE $1 ORDER BY id ASC LIMIT $2 OFFSET $3",
-        [$kw, $perPage, $offset]
-    );
+    $stmt = $pdo->prepare("SELECT  FROM buku WHERE judul ILIKE :kw ORDER BY id ASC LIMIT :limit OFFSET :offset");
+    $stmt->bindValue('kw', '%' . $keyword . '%');
 } else {
-    $hitung = pg_query($conn, "SELECT COUNT(*) FROM buku");
-
-    $stmt = pg_query_params(
-        $conn,
-        "SELECT * FROM buku ORDER BY id ASC LIMIT $1 OFFSET $2",
-        [$perPage, $offset]
-    );
+    $totalRows = $pdo->query("SELECT COUNT() FROM buku")->fetchColumn();
+    $stmt = $pdo->prepare("SELECT  FROM buku ORDER BY id ASC LIMIT :limit OFFSET :offset");
 }
-
-if ($hitung === false || $stmt === false) {
-    die("Query database gagal: " . pg_last_error($conn));
-}
-
-$totalRows = (int) pg_fetch_result($hitung, 0, 0);
-
-$daftarBuku = [];
-while ($row = pg_fetch_assoc($stmt)) {
-    $daftarBuku[] = $row;
-}
+$stmt->bindValue('limit', $perPage, PDO::PARAM_INT);
+$stmt->bindValue('offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
+$daftarBuku = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $totalPages = max(1, (int) ceil($totalRows / $perPage));
 ?>

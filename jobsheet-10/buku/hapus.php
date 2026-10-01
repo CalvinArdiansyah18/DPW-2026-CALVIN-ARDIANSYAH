@@ -11,19 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $id = $_POST['id'] ?? null;
 if ($id) {
-    /*
-     * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
-     *
-     * $stmt = $pdo->prepare("DELETE FROM buku WHERE id = :id");
-     * $stmt->execute(['id' => $id]);
-     */
-
-    $stmt = pg_query_params($conn, "DELETE FROM buku WHERE id = $1", [(int) $id]);
-
-    if ($stmt === false) {
-        die("Query database gagal: " . pg_last_error($conn));
-    }
-
+    $stmt = $pdo->prepare("DELETE FROM buku WHERE id = :id");
+    $stmt->execute(['id' => $id]);
     $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil dihapus.'];
 }
 
