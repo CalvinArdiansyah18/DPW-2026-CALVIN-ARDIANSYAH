@@ -13,7 +13,7 @@ if (!$id) {
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT FROM buku WHERE id = :id");
+$stmt = $pdo->prepare("SELECT * FROM buku WHERE id = :id");
 $stmt->execute(['id' => $id]);
 $buku = $stmt->fetch(PDO::FETCH_ASSOC);
 
