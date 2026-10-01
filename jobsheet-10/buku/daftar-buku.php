@@ -16,11 +16,11 @@ if ($keyword !== '') {
     $hitung->execute(['kw' => '%' . $keyword . '%']);
     $totalRows = $hitung->fetchColumn();
 
-    $stmt = $pdo->prepare("SELECT  FROM buku WHERE judul ILIKE :kw ORDER BY id ASC LIMIT :limit OFFSET :offset");
+    $stmt = $pdo->prepare("SELECT * FROM buku WHERE judul ILIKE :kw ORDER BY id ASC LIMIT :limit OFFSET :offset");
     $stmt->bindValue('kw', '%' . $keyword . '%');
 } else {
     $totalRows = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
-    $stmt = $pdo->prepare("SELECT  FROM buku ORDER BY id ASC LIMIT :limit OFFSET :offset");
+    $stmt = $pdo->prepare("SELECT * FROM buku ORDER BY id ASC LIMIT :limit OFFSET :offset");
 }
 $stmt->bindValue('limit', $perPage, PDO::PARAM_INT);
 $stmt->bindValue('offset', $offset, PDO::PARAM_INT);
