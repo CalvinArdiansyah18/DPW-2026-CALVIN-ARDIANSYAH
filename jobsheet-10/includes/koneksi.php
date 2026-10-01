@@ -46,14 +46,27 @@
 // Versi PostgreSQL pgsql - DIGUNAKAN DI RAILWAY
 // ------------------------------------------------------------
 
+// $connectionString = getenv('DATABASE_URL');
+
+// if (!$connectionString) {
+//     die("DATABASE_URL tidak ditemukan.");
+// }
+
+// $conn = pg_connect($connectionString);
+
+// if (!$conn) {
+//     die("Koneksi database gagal.");
+// }
+
 $connectionString = getenv('DATABASE_URL');
 
 if (!$connectionString) {
     die("DATABASE_URL tidak ditemukan.");
 }
 
-$conn = pg_connect($connectionString);
-
-if (!$conn) {
-    die("Koneksi database gagal.");
+try {
+    $pdo = new PDO($connectionString);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Koneksi database gagal: " . $e->getMessage());
 }

@@ -3,23 +3,19 @@ $page_title = "Beranda";
 include __DIR__ . '/includes/header.php';
 include __DIR__ . '/includes/koneksi.php';
 
-/*
- * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
- *
- * $totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
- * $totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
- */
+$totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
+$totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
 
 // Versi PostgreSQL pg_query - digunakan di Railway.
-$resultBuku = pg_query($conn, "SELECT COUNT(*) FROM buku");
-$resultAnggota = pg_query($conn, "SELECT COUNT(*) FROM anggota");
+// $resultBuku = pg_query($conn, "SELECT COUNT(*) FROM buku");
+// $resultAnggota = pg_query($conn, "SELECT COUNT(*) FROM anggota");
 
-if (!$resultBuku || !$resultAnggota) {
-    die("Query database gagal: " . pg_last_error($conn));
-}
+// if (!$resultBuku || !$resultAnggota) {
+//     die("Query database gagal: " . pg_last_error($conn));
+// }
 
-$totalBuku = pg_fetch_result($resultBuku, 0, 0);
-$totalAnggota = pg_fetch_result($resultAnggota, 0, 0);
+// $totalBuku = pg_fetch_result($resultBuku, 0, 0);
+// $totalAnggota = pg_fetch_result($resultAnggota, 0, 0);
 ?>
 
 <section>
