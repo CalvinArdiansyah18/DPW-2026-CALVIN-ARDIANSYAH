@@ -36,8 +36,14 @@
 //Railway
 $connectionString = getenv('DATABASE_URL');
 
+if (!$connectionString) {
+    die("DATABASE_URL tidak ditemukan.");
+}
+
 $conn = pg_connect($connectionString);
 
-if (!$conn) {
+if ($conn === false) {
     die("Koneksi database gagal.");
 }
+
+echo "Koneksi database berhasil.";
