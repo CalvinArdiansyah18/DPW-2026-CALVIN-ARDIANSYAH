@@ -13,9 +13,22 @@ if (!$id) {
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT * FROM buku WHERE id = :id");
-$stmt->execute(['id' => $id]);
-$buku = $stmt->fetch(PDO::FETCH_ASSOC);
+/*
+ * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
+ *
+ * $stmt = $pdo->prepare("SELECT * FROM buku WHERE id = :id");
+ * $stmt->execute(['id' => $id]);
+ * $buku = $stmt->fetch(PDO::FETCH_ASSOC);
+ */
+
+// Versi PostgreSQL pg_query_params.
+$stmt = pg_query_params($conn, "SELECT * FROM buku WHERE id = $1", [(int) $id]);
+
+if ($stmt === false) {
+    die("Query database gagal: " . pg_last_error($conn));
+}
+
+$buku = pg_fetch_assoc($stmt);
 
 if (!$buku) {
     header('Location: daftar-buku.php');

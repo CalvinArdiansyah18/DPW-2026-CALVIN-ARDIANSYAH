@@ -12,22 +12,62 @@ $page = max(1, (int) ($_GET['page'] ?? 1));
 $offset = ($page - 1) * $perPage;
 $keyword = trim($_GET['q'] ?? '');
 
+/*
+ * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
+ *
+ * if ($keyword !== '') {
+ *     $hitung = $pdo->prepare("SELECT COUNT(*) FROM anggota WHERE nama ILIKE :kw");
+ *     $hitung->execute(['kw' => '%' . $keyword . '%']);
+ *     $totalRows = $hitung->fetchColumn();
+ *
+ *     $stmt = $pdo->prepare("SELECT * FROM anggota WHERE nama ILIKE :kw ORDER BY id ASC LIMIT :limit OFFSET :offset");
+ *     $stmt->bindValue('kw', '%' . $keyword . '%');
+ * } else {
+ *     $totalRows = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
+ *     $stmt = $pdo->prepare("SELECT * FROM anggota ORDER BY id ASC LIMIT :limit OFFSET :offset");
+ * }
+ * $stmt->bindValue('limit', $perPage, PDO::PARAM_INT);
+ * $stmt->bindValue('offset', $offset, PDO::PARAM_INT);
+ * $stmt->execute();
+ * $daftarAnggota = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ */
+
+// Versi PostgreSQL pg_query / pg_query_params.
 if ($keyword !== '') {
-    $hitung = $pdo->prepare("SELECT COUNT(*) FROM anggota WHERE nama ILIKE :kw");
-    $hitung->execute(['kw' => '%' . $keyword . '%']);
-    $totalRows = $hitung->fetchColumn();
+    $kw = '%' . $keyword . '%';
 
-    $stmt = $pdo->prepare("SELECT * FROM anggota WHERE nama ILIKE :kw ORDER BY id ASC LIMIT :limit OFFSET :offset");
-    $stmt->bindValue('kw', '%' . $keyword . '%');
+    $hitung = pg_query_params(
+        $conn,
+        "SELECT COUNT(*) FROM anggota WHERE nama ILIKE $1",
+        [$kw]
+    );
+
+    $stmt = pg_query_params(
+        $conn,
+        "SELECT * FROM anggota WHERE nama ILIKE $1 ORDER BY id ASC LIMIT $2 OFFSET $3",
+        [$kw, $perPage, $offset]
+    );
 } else {
-    $totalRows = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
-    $stmt = $pdo->prepare("SELECT * FROM anggota ORDER BY id ASC LIMIT :limit OFFSET :offset");
-}
-$stmt->bindValue('limit', $perPage, PDO::PARAM_INT);
-$stmt->bindValue('offset', $offset, PDO::PARAM_INT);
-$stmt->execute();
+    $hitung = pg_query($conn, "SELECT COUNT(*) FROM anggota");
 
-$daftarAnggota = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = pg_query_params(
+        $conn,
+        "SELECT * FROM anggota ORDER BY id ASC LIMIT $1 OFFSET $2",
+        [$perPage, $offset]
+    );
+}
+
+if ($hitung === false || $stmt === false) {
+    die("Query database gagal: " . pg_last_error($conn));
+}
+
+$totalRows = (int) pg_fetch_result($hitung, 0, 0);
+
+$daftarAnggota = [];
+while ($row = pg_fetch_assoc($stmt)) {
+    $daftarAnggota[] = $row;
+}
+
 $totalPages = max(1, (int) ceil($totalRows / $perPage));
 ?>
 <section>

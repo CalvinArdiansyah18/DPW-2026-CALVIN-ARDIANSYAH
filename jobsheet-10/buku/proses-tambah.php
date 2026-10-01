@@ -31,20 +31,36 @@ if (!empty($errors)) {
     exit;
 }
 
-$stmt = $pdo->prepare(
+/*
+ * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
+ *
+ * $stmt = $pdo->prepare(
+ *     "INSERT INTO buku (judul, pengarang, tahun, isbn, stok, kategori)
+ *     VALUES (:judul, :pengarang, :tahun, :isbn, :stok, :kategori)
+ *     RETURNING id"
+ * );
+ * $stmt->execute([
+ *     'judul' => $judul,
+ *     'pengarang' => $pengarang,
+ *     'tahun' => (int) $tahun,
+ *     'isbn' => $isbn,
+ *     'stok' => (int) $stok,
+ *     'kategori' => $kategori,
+ * ]);
+ */
+
+// Versi PostgreSQL pg_query_params.
+$stmt = pg_query_params(
+    $conn,
     "INSERT INTO buku (judul, pengarang, tahun, isbn, stok, kategori)
-    VALUES (:judul, :pengarang, :tahun, :isbn, :stok, :kategori)
-    RETURNING id"
+     VALUES ($1, $2, $3, $4, $5, $6)
+     RETURNING id",
+    [$judul, $pengarang, (int) $tahun, $isbn, (int) $stok, $kategori]
 );
 
-$stmt->execute([
-    'judul' => $judul,
-    'pengarang' => $pengarang,
-    'tahun' => (int) $tahun,
-    'isbn' => $isbn,
-    'stok' => (int) $stok,
-    'kategori' => $kategori,
-]);
+if ($stmt === false) {
+    die("Query database gagal: " . pg_last_error($conn));
+}
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil ditambahkan.'];
 header('Location: daftar-buku.php');

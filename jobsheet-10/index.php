@@ -3,9 +3,14 @@ $page_title = "Beranda";
 include __DIR__ . '/includes/header.php';
 include __DIR__ . '/includes/koneksi.php';
 
-// $totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
-// $totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
+/*
+ * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
+ *
+ * $totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
+ * $totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
+ */
 
+// Versi PostgreSQL pg_query - digunakan di Railway.
 $resultBuku = pg_query($conn, "SELECT COUNT(*) FROM buku");
 $resultAnggota = pg_query($conn, "SELECT COUNT(*) FROM anggota");
 

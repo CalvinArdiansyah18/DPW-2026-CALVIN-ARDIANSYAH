@@ -13,9 +13,22 @@ if (!$id) {
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT * FROM anggota WHERE id = :id");
-$stmt->execute(['id' => $id]);
-$anggota = $stmt->fetch(PDO::FETCH_ASSOC);
+/*
+ * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
+ *
+ * $stmt = $pdo->prepare("SELECT * FROM anggota WHERE id = :id");
+ * $stmt->execute(['id' => $id]);
+ * $anggota = $stmt->fetch(PDO::FETCH_ASSOC);
+ */
+
+// Versi PostgreSQL pg_query_params.
+$stmt = pg_query_params($conn, "SELECT * FROM anggota WHERE id = $1", [(int) $id]);
+
+if ($stmt === false) {
+    die("Query database gagal: " . pg_last_error($conn));
+}
+
+$anggota = pg_fetch_assoc($stmt);
 
 if (!$anggota) {
     header('Location: daftar-anggota.php');

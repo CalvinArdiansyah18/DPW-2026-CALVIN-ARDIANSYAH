@@ -27,17 +27,34 @@ if (!empty($errors)) {
     exit;
 }
 
-$stmt = $pdo->prepare(
-    "UPDATE anggota SET nama = :nama, no_anggota = :no_anggota,
-     alamat = :alamat, no_hp = :no_hp WHERE id = :id"
+/*
+ * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
+ *
+ * $stmt = $pdo->prepare(
+ *     "UPDATE anggota SET nama = :nama, no_anggota = :no_anggota,
+ *      alamat = :alamat, no_hp = :no_hp WHERE id = :id"
+ * );
+ * $stmt->execute([
+ *     'nama' => $nama,
+ *     'no_anggota' => $noAnggota,
+ *     'alamat' => $alamat,
+ *     'no_hp' => $noHp,
+ *     'id' => $id,
+ * ]);
+ */
+
+// Versi PostgreSQL pg_query_params.
+$stmt = pg_query_params(
+    $conn,
+    "UPDATE anggota
+     SET nama = $1, no_anggota = $2, alamat = $3, no_hp = $4
+     WHERE id = $5",
+    [$nama, $noAnggota, $alamat, $noHp, (int) $id]
 );
-$stmt->execute([
-    'nama' => $nama,
-    'no_anggota' => $noAnggota,
-    'alamat' => $alamat,
-    'no_hp' => $noHp,
-    'id' => $id,
-]);
+
+if ($stmt === false) {
+    die("Query database gagal: " . pg_last_error($conn));
+}
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Anggota berhasil diperbarui.'];
 header('Location: daftar-anggota.php');

@@ -35,19 +35,37 @@ if (!empty($errors)) {
     exit;
 }
 
-$stmt = $pdo->prepare(
-    "UPDATE buku SET judul = :judul, pengarang = :pengarang, tahun = :tahun,
-     isbn = :isbn, stok = :stok, kategori = :kategori WHERE id = :id"
+/*
+ * Versi PDO - DISIMPAN SEBAGAI KOMENTAR
+ *
+ * $stmt = $pdo->prepare(
+ *     "UPDATE buku SET judul = :judul, pengarang = :pengarang, tahun = :tahun,
+ *      isbn = :isbn, stok = :stok, kategori = :kategori WHERE id = :id"
+ * );
+ * $stmt->execute([
+ *     'judul' => $judul,
+ *     'pengarang' => $pengarang,
+ *     'tahun' => (int) $tahun,
+ *     'isbn' => $isbn,
+ *     'stok' => (int) $stok,
+ *     'kategori' => $kategori,
+ *     'id' => $id,
+ * ]);
+ */
+
+// Versi PostgreSQL pg_query_params.
+$stmt = pg_query_params(
+    $conn,
+    "UPDATE buku
+     SET judul = $1, pengarang = $2, tahun = $3,
+         isbn = $4, stok = $5, kategori = $6
+     WHERE id = $7",
+    [$judul, $pengarang, (int) $tahun, $isbn, (int) $stok, $kategori, (int) $id]
 );
-$stmt->execute([
-    'judul' => $judul,
-    'pengarang' => $pengarang,
-    'tahun' => (int) $tahun,
-    'isbn' => $isbn,
-    'stok' => (int) $stok,
-    'kategori' => $kategori,
-    'id' => $id,
-]);
+
+if ($stmt === false) {
+    die("Query database gagal: " . pg_last_error($conn));
+}
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil diperbarui.'];
 header('Location: daftar-buku.php');
