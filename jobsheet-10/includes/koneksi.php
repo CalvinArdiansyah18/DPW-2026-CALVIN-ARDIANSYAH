@@ -42,8 +42,6 @@ if (!$connectionString) {
 
 $conn = pg_connect($connectionString);
 
-if ($conn === false) {
+if (!$conn) {
     die("Koneksi database gagal.");
 }
-
-echo "Koneksi database berhasil.";
