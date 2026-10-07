@@ -64,7 +64,7 @@ $daftarAktif = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo e($trx['judul']); ?></td>
                             <td><?php echo $trx['tanggal_pinjam']; ?></td>
                             <td>
-                                <form method="post" action="proses_kembali.php">
+                                <form method="post" action="proses-kembali.php">
                                     <?php echo csrf_field(); ?>
                                     <input type="hidden" name="id" value="<?php echo $trx['id']; ?>">
                                     <button type="submit">Kembalikan</button>
