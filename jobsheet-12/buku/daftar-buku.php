@@ -97,6 +97,5 @@ $totalPages = max(1, (int) ceil($totalRows / $perPage));
                 class="<?php echo $i === $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
         <?php endfor; ?>
     </nav>
-
 </section>
 <?php include __DIR__ . '/../includes/footer.php'; ?>
