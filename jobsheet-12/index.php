@@ -5,7 +5,7 @@ include __DIR__ . '/includes/koneksi.php';
 
 $totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
 $totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
-$totalDipinjam = $pdo->query("SELECT COUNT(*) FROM peminjaman WHERE status ='dipinjam")->fetchColumn();
+$totalDipinjam = $pdo->query("SELECT COUNT(*) FROM peminjaman WHERE status ='dipinjam'")->fetchColumn();
 ?>
 
 <section>
