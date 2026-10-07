@@ -20,7 +20,7 @@ unset($_SESSION['flash']);
     <?php endif; ?>
 
     <form action="proses-login.php" method="post">
-        <?php csrf_field(); ?>
+        <?php echo csrf_field(); ?>
         <p>
             <label for="username">Username</label>
             <input type="text" name="username" id="username">
