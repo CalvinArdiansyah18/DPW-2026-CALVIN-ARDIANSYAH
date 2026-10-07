@@ -8,7 +8,7 @@ $sudahLogin = isset($_SESSION['user_id']);
 
 // Prefix relatif ke root proyek ini (bukan root domain) — supaya
 // /assets, /index.php, dst tetap benar walau proyek diakses lewat
-// subfolder (mis. dp2026.test/kode-praktikum/jobsheet-07/), bukan cuma
+// subfolder (mis. dp2026.test/kode-praktikum/jobsheet-12/), bukan cuma
 // lewat vhost yang document root-nya langsung folder ini.
 $__jobsheetRoot = dirname(__DIR__);
 $__scriptDir = dirname($_SERVER['SCRIPT_FILENAME']);
@@ -45,7 +45,7 @@ $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
         </nav>
         <div class="auth-status">
             <?php if ($sudahLogin): ?>
-                <span><?php echo $_SESSION['nama']; ?></span>
+                <span><?php echo e($_SESSION['nama']); ?></span>
                 <a href="<?php echo $base; ?>auth/logout.php">Logout</a>
             <?php else: ?>
                 <a href="<?php echo $base; ?>auth/login.php">Login</a>
