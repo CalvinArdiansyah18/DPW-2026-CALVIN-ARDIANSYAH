@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../includes/auth.php';
-$page_title = "Peminjaman baru";
-require __DIR__ . '/../includes/header.php';
+$page_title = "Peminjaman Baru";
+include __DIR__ . '/../includes/header.php';
 require __DIR__ . '/../includes/koneksi.php';
 
 $flash = $_SESSION['flash'] ?? null;
@@ -15,7 +15,7 @@ $daftarBukuTersedia = $pdo->query("SELECT * FROM buku WHERE stok > 0 ORDER BY ju
     <h2>Peminjaman Buku Baru</h2>
 
     <?php if ($flash): ?>
-        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo e($flash['pesan']) ?></p>
+        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo e($flash['pesan']); ?></p>
     <?php endif; ?>
 
     <?php if (empty($daftarAnggota)): ?>
