@@ -20,6 +20,7 @@ unset($_SESSION['flash']);
     <?php endif; ?>
 
     <form action="proses-register.php" method="post">
+        <?php csrf_field(); ?>
         <p>
             <label for="nama">Nama</label><br>
             <input type="text" name="nama" id="nama" required>
